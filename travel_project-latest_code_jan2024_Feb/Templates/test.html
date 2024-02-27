@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/style.css') }}">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/tamilnadu_devo.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/icon.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Location</title>
+</head>
+
+<body>
+
+        <!--===========Nav Bar=================-->
+        <section class="nav-bar">          
+            <ul class="menu">
+                <script> 
+                    var username = {{username1}}
+                    if (username) {
+                        <div class="logo"> Welcome, {{username}} </div>
+                    }
+                    else {
+                        <div class="logo"> {{ state }} </div> 
+                    }
+                        
+                </script>
+                <li><a href="{{ url_for('site_home') }}">home</a></li>
+                <li><a href="{{ url_for ('viewblog')}}">blog</a></li>
+                <li><a href="{{ url_for ('about')}}">about us</a></li>
+                <li><a href="{{ url_for ('contactus')}}">contact us</a></li>
+                {% if username %}
+                <li><a href= "{{ url_for('logout') }}" >Logout</a></li>
+                {% else %}
+                <li><a href= "{{ url_for('login') }}" >Login</a></li>
+                {% endif %}
+            </ul>
+            </div>
+
+        </section>
+        <!--===============Banner================-->
+        <article> 
+            <div class="logo" align="center">Welcome to {{ state }}</div>
+            <form id="locationForm" method="POST" action="{{ url_for('locationdetails')}}">
+                <!-- Sidebar -->
+                <div class="side-menu">
+                    <label for="stateselector">Select a State:</label>
+                    <script> 
+                        var stateselector = {{stateselector}}
+                        var cityselector = {{cityselector}}
+                    </script>
+                    <div class="custom-dropdown">
+                        <select id="stateselector" name="stateselector">
+                            {% for state in data_location.state %}
+                                    <option value="{{ state }}">{{ state }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <label for="cityselector">Select a City:</label>
+                    <div class="custom-dropdown">
+                        <select id="cityselector" name="cityselector">
+                            {% for location in data_location.cities %}
+                            <option value="{{ location }}" {% if location == default_city %} selected {% endif %}>{{ location }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <label for="categoryselector">Select a Category:</label>
+                    <div class="custom-dropdown">
+                        <select id="categoryselector" name="categoryselector">
+                            {% for category in data_location.categories %}
+                            <option value="{{ category }}">{{ category }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                <button type="submit">Search</button> <!-- Add a submit button to submit the form -->
+                </div>
+            </form>
+
+            <!-- Card Container -->
+            <div class="card-container">
+                {% for card in card_data %}
+                <div class="card {{ card.class }}">
+                    <div class="visual">
+                        <img class="resizable-image" src={{ card.image }} alt="img" />
+                    </div>
+                    <div class="text-content">
+                        <h3>{{ card.name }}</h3>
+                        <p> {{ card.description }}</p>
+                        <a href="{{ card.map_reflink }}" target="_blank">Go to Maps</a>
+                        <a id="likeBtn" name="likeBtn">Like {{card.likes}} </a>
+                    </div>
+  
+                    <script src="{{ url_for('static',filename='js/icon.js') }}"></script>
+                
+            </div>
+            {% endfor %}
+            </div>
+        </article>
+
+        <div id="username_">{{username}}</div>
+        <div id="chat-window" class="chat-window">
+            <div class="chat-header">
+                Hello {{ username1 }}, How can I Help?
+                <button id="toggle-chat" class="minimize-button">-</button>
+            </div>
+            <div id="chat-output"></div>
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-button">Send</button>
+        </div>
+        <script> let file_local = "{{ url_for('static',filename='data/likes.json') }}"</script>
+        <script src="{{ url_for('static',filename='js/chat.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/cityupdate.js') }}"></script>
+
+</body>
+
+</html>

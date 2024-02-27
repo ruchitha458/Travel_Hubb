@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/css/blog.css') }}">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/style.css') }}">
+</head>
+<body>
+    <section class="nav-bar">
+        <ul class="menu">
+            <li><a href="{{ url_for('site_home') }}">home</a></li>
+            <li><a href="{{ url_for ('viewblog')}}">blog</a></li>
+            <li><a href="{{ url_for ('about')}}">about us</a></li>
+            <li><a href="{{ url_for ('contactus')}}">contact us</a></li>
+            <li><a href="{{login}}">Login / Signup</a></li>
+        </ul>
+        </div>
+
+    </section>
+    <header>
+        <h1>Blogs</h1>
+    </header>
+    <main id="blog-posts">
+        <!-- Blog posts will be dynamically added here -->
+    </main>
+    <form id="add-post-form" method="POST" enctype="multipart/form-data">
+        <h2>Add a New Blog Post</h2>
+        <label for="post-title">Title:</label>
+        <input type="text" id="post-title" name= "post_title" required>
+        <label for="post-content">Content:</label>
+        <textarea id="post-content" rows="4" name="post_content" required></textarea>
+        <button type="button" id="choose-media">Choose Media (Image)</button>
+        <input type="file" id="file-input" name="file_input" accept="image/*, video/*" style="display: none;" required>
+        <p id="file-path-display"></p>
+        <button type="submit">Add Post</button>
+    </form>
+    <!-- Sample data for initial blog posts -->
+    <a href="{{ url_for('viewblog') }}" class="view-blog-button">View Blog Posts</a>
+    <!--<script> 
+         blogsdetails = [
+    { title: "Baga Beach - Goa", 
+     content: "Turning every bite into an adventure, and every adventure into a chance to make a difference. ️Exploring the world through food and adventure, while leaving it a little better than we found it. ✨", 
+     media: "{{ url_for('static', filename='images/ruchi.jpg') }}" },
+     { title: "Abbey Falls - Madikeri", 
+     content: "Finding peace amidst the cascades Abbey Falls, the perfect escape for the soul.  Hiking through lush greenery, the refreshing reward at the end.Feeling the cool embrace of Abbey Falls. The perfect Coorg cocktail at Abbey Falls. ",
+     media: "D:/travel_project-latest_code_jan2024_Feb_modified/travel_project-latest_code_jan2024_Feb/static/images/falls.mp4" },
+   { title: "Bhaderwah - Jammu Kashmir",
+    content: " Unveiling the winter wonderland of Bhaderwah Where snow-capped peaks meet adventure.Escape the ordinary and embrace the magic of Kashmir's hidden gem.Bhaderwah offers an adventure for every soul.Hot cocoa by the fireplace, breathtaking views, and zero Wi-Fi Bhaderwah is my kind of detox.", 
+      media: "D:/travel_project-latest_code_jan2024_Feb_modified/travel_project-latest_code_jan2024_Feb/static/images/snow.cms" }
+     ];
+    </script>-->
+    <script src="{{ url_for('static', filename='js/blog.js') }}"></script>
+    <script>
+        // JavaScript to handle button click and trigger file input
+        document.getElementById("choose-media").addEventListener("click", function() {
+            document.getElementById("file-input").click(); // Trigger click event on the file input
+        });
+    </script>
+</body>
+</html>

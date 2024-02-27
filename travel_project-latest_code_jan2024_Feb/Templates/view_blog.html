@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Blog</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/css/blog.css') }}">
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/style.css') }}">
+</head>
+<body>
+    <section class="nav-bar">
+        <ul class="menu">
+            <li><a href="{{ url_for('site_home') }}">home</a></li>
+            <li><a href="{{ url_for ('viewblog')}}">blog</a></li>
+            <li><a href="{{ url_for ('about')}}">about us</a></li>
+            <li><a href="{{ url_for ('contactus')}}">contact us</a></li>
+            <li><a href="{{login}}">Login / Signup</a></li>
+        </ul>
+        </div>
+
+    </section>
+    <header>
+        <h1>Blogs</h1>
+    </header>
+    <main id="blog-posts">
+        <!-- Blog posts will be dynamically added here -->
+        {% for post in blogPosts %}
+        <div class="blog-post">
+            <h2>{{ post.title }}</h2>
+            <p>{{ post.content }}</p>
+            {% if post.media %}
+            <img src="{{ url_for('static', filename=post.media) }}" alt="Image">
+            {% endif %}
+        </div>
+        {% endfor %}
+    </main>
+    <a href="{{ url_for('create_blog') }}" class="create-blog-button">Create New Blog Post</a>
+</body>
+</html>

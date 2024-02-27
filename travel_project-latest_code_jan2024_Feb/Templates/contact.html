@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="../static/styles/css/contact.css" />
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/style.css') }}">
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <section class="nav-bar">
+      <ul class="menu">
+        <script> 
+          var username = {{username1}}
+      </script>
+          <li><a href="{{ url_for('site_home') }}">home</a></li>
+          <li><a href="{{ url_for ('viewblog')}}">blog</a></li>
+          <li><a href="{{ url_for ('about')}}">about us</a></li>
+          <li><a href="{{ url_for ('contactus')}}">contact us</a></li>
+          {% if username %}
+          <li><a href= "{{ url_for('logout') }}" >Logout</a></li>
+          {% else %}
+          <li><a href= "{{ url_for('login') }}" >Login</a></li>
+          {% endif %}
+      </ul>
+      </div>
+
+  </section>
+    <div class="container">
+      
+      <div class="form">
+        <div class="contact-info">
+          <h3 class="title">Let's get in touch</h3>
+          <p class="text">
+            Whether you have a question about places,details,description or anything else,our team is ready
+            to answer all your questions.We want you to get where you're going faster.
+          </p>
+
+          <div class="info">
+            <div class="information">
+             
+              <p>Vadlamudi,Guntur</p>
+            </div>
+            <div class="information">
+              
+              <p>Indian-travel-hub@gmail.com</p>
+            </div>
+            <div class="information">
+              
+              <p></p>
+            </div>
+          </div>
+
+          <div class="social-media">
+            <p>Connect with us :</p>
+            <div class="social-icons">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </div><br>
+            <div class="credit">Keep calm and travel on </div>
+          </div>
+        </div>
+
+        <div class="contact-form">
+          <span class="circle one"></span>
+          <span class="circle two"></span>
+
+          <form action="{{ url_for ('contactus')}}" method="post" autocomplete="off">
+            <h3 class="title">Contact us</h3>
+            <div class="input-container">
+              <input type="text" name="username" class="input" placeholder="UserName" id = "username" />
+            </div>
+            <div class="input-container">
+              <input type="email" name="email" class="input" placeholder="email" id="email"/>
+            </div>
+            <div class="input-container">
+              <input type="tel" name="phone" class="input" placeholder="Phone Number" id="phone"/>
+            </div>
+            <div class="input-container textarea">
+              <textarea name="message" class="input" placeholder="Type your message" id="message"></textarea>
+            </div>
+            <input type="submit" value="Send" class="btn" />
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="contact.js"></script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/css/style.css') }}">
+    <title>Go Travel India - Find your Destination</title>
+</head>
+
+<body>
+
+    <body>
+
+        <!--===========Nav Bar=================-->
+        <section class="nav-bar">
+            <div class="logo">
+                {% if username1 %}
+                    Welcome, {{ username1 }}
+                {% else %}
+                    Welcome
+                {% endif %}
+            </div>
+            <ul class="menu">
+                <li><a href="{{ url_for('site_home') }}">home</a></li>
+                <li><a href="{{ url_for ('viewblog')}}">blog</a></li>
+                <li><a href="{{ url_for ('about')}}">about us</a></li>
+                <li><a href="{{ url_for ('contactus')}}">contact us</a></li>
+                {% if username1 %}
+                <li><a href= "{{ url_for('logout') }}" >Logout</a></li>
+                {% else %}
+                <li><a href= "{{ url_for('login') }}" >Logout</a></li>
+                {% endif %}
+            </ul>
+            </div>
+
+        </section>
+        <!--===============Banner================-->
+        <section class="banner">
+            <div class="banner-text-item">
+                <div class="banner-heading">
+                    <h1>Find your Next Tourist Spot!</h1>
+                </div>
+                <form class="form" method="POST" action="{{ url_for('locationdetails',state = '{{selected_state}}')}}">
+                    <input list="mylist" name="selected_state" id="state" placeholder="Where would you like to go? Select City Name">
+                    <datalist id="mylist">
+                        {% for location in locations %}
+                        <option> {{location}} </option>
+                        {% endfor %}
+                    </datalist>
+                    
+                </form>
+            </div>
+        </section>
+
+        <div id="username_">{{username1}}</div>
+        <div id="chat-window" class="chat-window">
+            <div class="chat-header">
+                Hello {{ username1 }}, How can I Help?
+                <button id="toggle-chat" class="minimize-button">-</button>
+            </div>
+            <div id="chat-output"></div>
+            <input type="text" id="user-input" placeholder="Type a message...">
+            <button id="send-button">Send</button>
+            </div>
+
+        </div>
+        <script src="{{ url_for('static',filename='js/chat.js') }}"></script>
+    </body>
+
+    </body>
+
+</html>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+/* Styles for buttons */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size:20px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Animation for like button */
+@keyframes animate-like {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.animate-like {
+  animation: animate-like 0.5s ease;
+}
